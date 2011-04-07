@@ -1,0 +1,47 @@
+function countdown()
+{
+	for(cn=1;cn<=countdowns;cn++)
+	{
+		build=document.getElementById('build'+cn);
+		s=build.title;m=0;h=0;d=0;
+		if(s<0)
+		{
+			build.innerHTML="-"
+		}
+		else
+		{
+			if(s>59)
+			{
+				m=Math.floor(s/60);
+				s=s-m*60
+			}
+			if(m>59)
+			{
+				h=Math.floor(m/60);
+				m=m-h*60
+			}
+			if(h>23)
+			{
+				d=Math.floor(h/24);
+				h=h-d*24
+			}
+			if(s<10)
+			{
+				s="0"+s
+			}
+			if(m<10)
+			{
+				m="0"+m
+			}
+			if(h<10)
+			{
+				h="0"+h
+			}
+			html=(d>1)?"e":"";
+			html=(d>0)?d+" Tag"+html:html;
+			build.innerHTML=html+ " "+h+":"+m+":"+s+"";
+		}
+		build.title=build.title-1;
+	}
+	window.setTimeout("countdown();",999);
+}

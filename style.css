@@ -1,0 +1,272 @@
+div#report {
+	border: 0;
+	width: 550px;
+	margin: 0 auto;
+	margin-top: 20px;
+	background-color: Silver;
+}
+
+div#outerframe {
+	position: relative;
+	width: 1000px;
+	margin: 0 auto;
+	padding: 0;
+	border: 0;
+	background: url("pics/out_back.jpg");
+}
+img#back_left {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	float: left;
+	width: 40px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+img#back_right {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	float: right;
+	width: 40px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+div#frame {
+	border: 0;
+	width: 920px;
+	margin: 0 40px;
+	background: url('pics/back.jpg');
+}
+div#header {
+	height: 200px;
+	background: url('pics/header.jpg');
+	margin: 0;
+	padding: 0;
+}
+div#navi_top {
+	clear: both;
+	border: 0;
+	height: 24px;
+	background: url('pics/header_spacer.jpg');
+	color: #D8D8D8;
+	padding-top: 6px;
+}
+div#navi_top p {
+	float: left;
+	min-width: 130px;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+div#navi_top a {
+	display: block;
+	color: #FFA50A;
+	text-decoration: none;
+}
+div#navi_top a:hover {
+	display: block;
+	color: #FF5607;
+}
+div#navi_left {
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 130px;
+	color: #FFFFFF;
+}
+div#navi_left ul {
+	margin: 0;
+	padding: 0;
+}
+div#navi_left li {
+	display: block;
+	list-style: none;
+	margin: 0px;
+	padding: 0;
+	font-weight: bold;
+	border: 0;
+}
+div#navi_left a, div#navi_left a:visited, div#navi_left a:active, div#navi_left a:hover {
+	display: block;
+	color: #FFA50A;
+	text-decoration: none;
+	border: 0;
+}
+div#navi_left img {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+div#content {
+	margin: 0 130px 0 130px;
+	width: 660px;
+	border: 0;
+	min-height: 400px;
+	background: url('pics/content_back.jpg');
+	padding: 0;
+	text-align: center;
+}
+div#content img {
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+div#content a, div#content a:visited, div#content a:active {
+	color: blue;
+	text-decoration: none;
+}
+div#content a:hover {
+	color: red;
+}
+div#content table {
+	margin: 0 auto;
+}
+div#content p {
+	margin: 0;
+}
+div#content table#login {
+	border-collapse: collapse;
+	border: 1px solid black;
+	margin-top: 15px;
+	width: 300px;
+	background-color: #AAAAAA;
+}
+div#content table#login th {
+	background: url("pics/th_300.jpg");
+	margin: 0;
+	border: 1px solid black;
+	padding-top: 4px;
+}
+
+div#navi_right {
+	float: right;
+	width: 130px;
+	margin: 0;
+	padding: 0;
+}
+
+div#footer {
+	clear: both;
+	border: 0;
+	width: 920px;
+	height: 52px;
+	background: url('pics/footer.jpg');
+}
+
+table#table01 {
+	position:relative;
+	width: 550px;
+	margin: 0 auto;
+	border: 0;
+	border-collapse: collapse;
+	font-size: 10pt;
+	background-color: #AAAAAA;
+}
+table#table01 td {
+	border: 1px solid black;
+	margin: 0;
+}
+table#table01 td.top {
+	font-weight: bold;
+}
+table#table01 th {
+	border: 1px solid black;
+	margin: 0;
+	padding-top: 5px;
+	background: url('pics/th.jpg');
+	background-position:center;
+	height: 24px;
+}
+table#table01 p {
+	padding: 0;
+	margin: 0;
+}
+table#table01 h4 {
+	padding: 0;
+	margin: 0;
+}
+
+table#table02 {
+	width: 550px;
+	margin: 0 auto;
+	border: 0;
+	border-collapse: collapse;
+}
+table#table02 td {
+	border: 1px solid black;
+	margin: 0;
+}
+
+table#map {
+	border: 0;
+	border-collapse: collapse;
+}
+
+table#map td {
+	border: 0;
+	width: 98px;
+	height: 100px;
+	vertical-align: top;
+	font-size: 10pt;
+}
+table#map th.top {
+	background-color: gray;
+	height: 30px;
+}
+table#map th.left {
+	background-color: gray;
+	width: 30px;
+}
+
+div#content table#news {
+	border: 1px solid black;
+	margin-top: 15px;
+	width: 550px;
+}
+table#news th {
+	text-align: left;
+}
+table#news td {
+	text-align: left;
+	vertical-align: top;
+}
+table#news td.small {
+	text-align: left;
+	font-size: 12px;
+}
+
+body {
+	background-color: #dadada;
+	font-family: Arial;
+	font-size: 10pt;
+	margin-top: 0;
+}
+
+td.text {
+	text-align: left;
+}
+td.number {
+	text-align: right;
+}
+td.center {
+	text-align: center;
+}
+td.link {
+	width: 150px;
+}
+p.small {
+	font-size: 8pt;
+	padding-top: 10px;
+}
+.good {
+	color:	#02CA10;
+}
+.critic {
+	color:	#FFEC19;
+}
+.full {
+	color:	#E70000;
+}
