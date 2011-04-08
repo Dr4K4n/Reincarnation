@@ -5,5 +5,4 @@ $_SQL['host'] = 'localhost';
 $_SQL['user'] = 'reincarnation';
 $_SQL['pass'] = 'youngcoder';
 $_SQL['db'] = 'reincarnation';
-
 ?>

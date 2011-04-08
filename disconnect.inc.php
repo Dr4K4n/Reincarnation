@@ -1,3 +1,3 @@
 <?php
-if($verbindung) { mysql_close($verbindung); }
+if($_SQL['connection]) { mysql_close($_SQL['connection']); }
 ?>

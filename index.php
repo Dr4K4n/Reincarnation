@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include_once("config.inc.php");
 
 $site 		= $_GET["seite"];
