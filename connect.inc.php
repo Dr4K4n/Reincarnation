@@ -1,6 +1,4 @@
 <?php
-$verbindung = mysql_connect("localhost","ogame","youngcoder") or die ("Keine Verbindung !"); 
-// Adresse zur MySQL Datenbank, Benutzername und Passwort
-mysql_select_db("ogame") or die ("Keine oder falsche Datenbank !"); 
-// Datenbank-Name
+$verbindung = mysql_connect($_SQL['host'],$_SQL['user'],$_SQL['pass']) or die ("Keine Verbindung !"); 
+mysql_select_db($_SQL['db']) or die ("Keine oder falsche Datenbank !"); 
 ?>
