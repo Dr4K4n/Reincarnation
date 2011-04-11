@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: cp1252 -*-
+# -*- coding: utf-8 -*-
 
 from time import time,sleep
 import MySQLdb
@@ -35,7 +35,7 @@ def orderbyid(liste):
 		highest_id = unterliste[0]
 	return neueliste,highest_id
 
-# Verbindung zum MySQL Server herstellen und Datenbank auswählen
+# Verbindung zum MySQL Server herstellen und Datenbank auswÃ¤hlen
 verbindung = MySQLdb.connect('127.0.0.1','reincarnation','HCBjBW5XRUEEfA8w')
 cursor = verbindung.cursor()
 cursor.execute('USE reincarnation;')
@@ -55,14 +55,14 @@ cursor.execute('SELECT id,name FROM researches')
 names_research = cursor.fetchall()
 names_research,researches_count = orderbyid(names_research)
 
-# Variablen definieren, damit das script als daemon läuft
+# Variablen definieren, damit das script als daemon lÃ¤uft
 unendlich = 1
 pointoftime = int(time())
 nexttime = pointoftime
 
 while unendlich == 1:
 	pointoftime = int(time())
-	# Wenn seit der letzen Ausführung des Scripts mind. 1 sek vergangen ist wird es wieder ausgeführt
+	# Wenn seit der letzen AusfÃ¼hrung des Scripts mind. 1 sek vergangen ist wird es wieder ausgefÃ¼hrt
 	if pointoftime >= nexttime:
 		print 'Tick: '+str(pointoftime)
 		############################################################
@@ -91,7 +91,7 @@ while unendlich == 1:
 					# Truppen des Verteidigers aus der Datenbank auslesen
 					cursor.execute('SELECT fe,h2o,uran,time,troops,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13 FROM cities WHERE id=%s'%target)
 					d_array = cursor.fetchall()[0]
-					# Wenn der überhaupt Truppen hat
+					# Wenn der Ã¼berhaupt Truppen hat
 					if len(d_array) != 0:
 						print "Deffer: "+str(d_array)
 						deffer_exists = 1
