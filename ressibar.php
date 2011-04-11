@@ -1,5 +1,5 @@
 <?php
-$ressis_query = mysql_query("SELECT fe,h2o,uran,time,b2,b3,b4,b5,b11,b12 FROM cities WHERE id='$city'");
+$ressis_query = mysql_query("SELECT fe,h2o,uran,time,buildings FROM cities WHERE id='$city'");
 $ressis_array = mysql_fetch_array($ressis_query);
 $ressis_array = ressis_now($ressis_array,$city);
 
