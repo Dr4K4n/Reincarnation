@@ -1,5 +1,6 @@
 <?php
-error_reporting(E_ERROR);
+#error_reporting(E_ERROR);
+error_reporting(E_ALL);
 
 $_SQL['host'] = 'localhost';
 $_SQL['user'] = 'reincarnation';
