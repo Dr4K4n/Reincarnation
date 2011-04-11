@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: cp1252 -*-
+# -*- coding: utf-8 -*-
 
 from time import time
 import MySQLdb
@@ -31,7 +31,7 @@ cursor.execute('DELETE FROM messages WHERE time <= %s'%oneweekago)
 # alte Berichte löschen
 cursor.execute('DELETE FROM reports WHERE time <= %s'%oneweekago)
 
-# Punktzahlen die die Geb�ude pro Stufe geben aus der DB lesen
+# Punktzahlen die die Gebï¿½ude pro Stufe geben aus der DB lesen
 cursor.execute('SELECT id,points FROM buildings ORDER BY id')
 buildings_data = cursor.fetchall()
 buildings_points_dict = {}
@@ -45,7 +45,7 @@ researches_points_dict = {}
 for eintrag in researches_data:
 	researches_points_dict[int(eintrag[0])] = int(eintrag[1])
 
-# Punkte aller St�dte berechnen, in die DB eintragen und den Besitzern gutschreiben
+# Punkte aller Stï¿½dte berechnen, in die DB eintragen und den Besitzern gutschreiben
 cursor.execute('SELECT id,owner,buildings FROM cities')
 city_buildings = cursor.fetchall()
 
@@ -87,7 +87,7 @@ for gamer in gamer_researches:
 	researcher_dict[gamer_id] = researches_points
 	cursor.execute("UPDATE gamer SET `research_points`='%s' WHERE `id`='%s'" %(researches_points,gamer_id))
 
-# Geb�udepunkte aller Spieler in die DB eintragen
+# Gebï¿½udepunkte aller Spieler in die DB eintragen
 for x in points_dict:
 	try:
 		points = points_dict[x]+researcher_dict[x]
