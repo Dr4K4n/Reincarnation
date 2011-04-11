@@ -328,7 +328,7 @@ while unendlich == 1:
 					level = 1
 				name = names_research[research][0]
 				
-				gamer_research_new = dict_to_string(gamer_research_dict)
+				#gamer_research_new = dict_to_string(gamer_research_dict)
 				cursor.execute("UPDATE gamer_research SET "+db_field+"='%s' WHERE id='%s'"%(level,owner))
 				cursor.execute("DELETE FROM events_research WHERE id='%s'"%id)
 				
