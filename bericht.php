@@ -14,18 +14,18 @@
 
 function make_array($start_array,$end_count)
 {
-	$array = split("\n",$start_array);
-	$end_array = array();
-	for($x=0;$x<count($array);$x++)
-	{
+    $array = split("\n",$start_array);
+    $end_array = array();
+    for($x=0;$x<count($array);$x++)
+    {
 		$parsed = split(";",$array[$x]);
 		$id = $parsed[0];
 		$level = $parsed[1];
 		$mid_array[$id] = trim($level);
-	}
+    }
 
-	for($x=1;$x<=$end_count;$x++)
-	{
+    for($x=1;$x<=$end_count;$x++)
+    {
 		if(!$mid_array[$x])
 		{
 			$end_array[$x] = 0;
@@ -34,30 +34,30 @@ function make_array($start_array,$end_count)
 		{
 			$end_array[$x] = $mid_array[$x];
 		}
-	}
+    }
 
-	return $end_array;
+    return $end_array;
 }
 
 function getcoords($city)
 {
-	$coords_query = mysql_query("SELECT id,x,y FROM cities WHERE id='$city'");
-	$coords_array = mysql_fetch_array($coords_query);
-	$x = $coords_array["x"];
-	$y = $coords_array["y"];
-	return array($x,$y);
+    $coords_query = mysql_query("SELECT id,x,y FROM cities WHERE id='$city'");
+    $coords_array = mysql_fetch_array($coords_query);
+    $x = $coords_array["x"];
+    $y = $coords_array["y"];
+    return array($x,$y);
 }
 
 function unit_name($id)
 {
-	$unit_query = mysql_query("SELECT name FROM units WHERE id='$id'");
-	$unit_array = mysql_fetch_array($unit_query);
-	return $unit_array["name"];
+    $unit_query = mysql_query("SELECT name FROM units WHERE id='$id'");
+    $unit_array = mysql_fetch_array($unit_query);
+    return $unit_array["name"];
 }
 
 $id = $_GET["id"];
 
-include("connect.inc.php");
+include_once("connect.inc.php");
 
 $bericht_query = mysql_query("SELECT * FROM reports WHERE id='$id'");
 if(mysql_num_rows($bericht_query) != 0)
@@ -119,7 +119,7 @@ else
 	echo 'Bericht nicht vorhanden!';
 }
 
-include("disconnect.inc.php");
+include_once("disconnect.inc.php");
 ?>
 
 </body>

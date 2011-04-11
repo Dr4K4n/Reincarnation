@@ -13,6 +13,7 @@ if($action == 'del')
 }
 elseif($action == 'show')
 {
+	#TODO joins!
 	$newsid = $_GET["id"];
 	$news_query = mysql_query("SELECT * FROM news WHERE id='$newsid'");
 	$news_array = mysql_fetch_array($news_query);
@@ -36,6 +37,7 @@ elseif($action == 'show')
 }
 else
 {
+	#TODO joins!
 	$news_query = mysql_query("SELECT * FROM news ORDER BY id DESC");
 	while($news_row = mysql_fetch_object($news_query))
 	{

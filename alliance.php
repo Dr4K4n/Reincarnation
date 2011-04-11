@@ -3,12 +3,6 @@
 <table id="table01">
 <?php
 
-function alliancerank($rank)
-{
-	if($rank == 0) { return 'Mitglied'; }
-	if($rank == 1) { return 'Administrator'; }
-}
-
 $id = $_GET["id"];
 $action = $_GET["action"];
 
@@ -31,14 +25,14 @@ elseif($action == 'found')
 	{
 		$name = $_POST['name'];
 		$tag = $_POST['tag'];
-		$alliance_name_exists = mysql_query("SELECT id FROM alliances WHERE name='$name'");
-		$alliance_tag_exists = mysql_query("SELECT id FROM alliances WHERE tag='$tag'");
-		if(mysql_num_rows($alliance_name_exists) == 0 && mysql_num_rows($alliance_tag_exists) == 0)
+		$alliance_exists = mysql_query("SELECT id FROM alliances WHERE name='$name' OR tag='$tag'");
+		if(mysql_num_rows($alliance_exists) == 0)
 		{
 			$i_alliance_query = mysql_query("INSERT INTO alliances (name,tag,founder) VALUES ('$name','$tag','$userid')");
-			$alliance_query = mysql_query("SELECT id FROM alliances WHERE tag='$tag' AND founder='$userid'");
+			$alliance_id = mysql_insert_id($i_alliance_query);
+			/*$alliance_query = mysql_query("SELECT id FROM alliances WHERE tag='$tag' AND founder='$userid'");
 			$alliance_array = mysql_fetch_array($alliance_query);
-			$alliance_id = $alliance_array['id'];
+			$alliance_id = $alliance_array['id'];*/
 			$member_gamer_query = mysql_query("INSERT INTO alliances_members VALUES ('$alliance_id','$userid','1')");
 		}
 		else
@@ -81,30 +75,20 @@ elseif($action == 'search')
 	$submit = $_POST['submit'];
 	if($submit == ' suchen ')
 	{
-		$name = "%".$_POST['name']."%";
-		$tag = "%".$_POST['tag']."%";
+		$search_name = "%".mysql_real_escape_string($_POST['name'])."%";
+		$search_tag = "%".mysql_real_escape_string($_POST['tag'])."%";
 		echo '<table id="table01"><tr><th colspan="2">Suchergebnis</th></tr>';
-		$shown = array();
-		if($name != '%%')
+		if($search_name != '%%' OR $search_tag != '%%')
 		{
-			$name_query = mysql_query("SELECT id,name,tag FROM alliances WHERE name LIKE '$name'");
-			while($name_row = mysql_fetch_object($name_query))
+			$search_SQL = "SELECT id,name,tag FROM alliances WHERE ";
+			$search_SQL .= $search_name != '%%' ? "name LIKE '$search_name'" : "";
+			$search_SQL .= ($search_name != '%%' AND $search_tag != '%%') ? " OR " : "";
+			$search_SQL .= $search_tag != '%%' ? "tag LIKE '$tag'" : "";
+			$search_query = mysql_query($search_SQL);
+			while($name_row = mysql_fetch_object($search_query))
 			{
 				echo '<tr><td>[<a href="?seite=allianz&id='.$name_row->id.'">'.$name_row->tag.'</a>]</td>';
 				echo '<td><a href="?seite=allianz&id='.$name_row->id.'">'.$name_row->name.'</a></td></tr>';
-				array_push($shown,$name_row->id);
-			}
-		}
-		if($tag != '%%')
-		{
-			$tag_query = mysql_query("SELECT id,name,tag FROM alliances WHERE tag LIKE '$tag'");
-			while($tag_row = mysql_fetch_object($tag_query))
-			{
-				if(!in_array($tag_row->id,$shown))
-				{
-					echo '<tr><td>[<a href="?seite=allianz&id='.$tag_row->id.'">'.$tag_row->tag.'</a>]</td>';
-					echo '<td><a href="?seite=allianz&id='.$tag_row->id.'">'.$tag_row->name.'</a></td></tr>';
-				}
 			}
 		}
 	}
@@ -344,16 +328,15 @@ elseif($id)
 }
 else
 {
-	$application_query = mysql_query("SELECT * FROM alliances_applications WHERE userid='$userid'");
+	# TODO macht das Sinn ? Wann wird das angezeigt ?
+	$application_SQL = "SELECT a.name, a.id FROM alliances_applications aa WHERE userid='$userid' LEFT JOIN alliances a ON a.id = aa.alliance";
+	$application_query = mysql_query($application_SQL);
 	if(mysql_num_rows($application_query) != 0)
 	{
 		echo '<table id="table01"><tr><th colspan="2">Bewerbungen</th></tr>';
 		while($application_row = mysql_fetch_object($application_query))
 		{
-			$id = $application_row->alliance;
-			$alliance_query = mysql_query("SELECT name FROM alliances WHERE id='$id'");
-			$alliance_array = mysql_fetch_array($alliance_query);
-			echo '<tr><td><a href="?seite=allianz&id='.$id.'">'.$alliance_array['name'].'</a></td>';
+			echo '<tr><td><a href="?seite=allianz&id='.$application_row->id.'">'.$application_row->name.'</a></td>';
 			echo '<td><a href="?seite=allianz&action=delapp">löschen</a></td></tr>';
 		}
 		echo '</table>';

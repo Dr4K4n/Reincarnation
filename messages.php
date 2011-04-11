@@ -1,7 +1,5 @@
 <h3>Nachrichten</h3>
 
-
-
 <?php
 $ordner	= $_GET["ordner"];
 $to	= $_GET["to"];

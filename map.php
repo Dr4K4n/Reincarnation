@@ -11,6 +11,26 @@ $spieler_id		= $_GET["spieler"];
 if($stadt_id)
 {
 	## Profil einer Stadt ausgeben
+	$city_SQL = "SELECT c.id, c.name, a.tag, a.id as alliance, c.x, c.y, c.owner, g.user FROM cities c \
+	    LEFT JOIN gamer g ON c.owner = g.id \
+	    LEFT JOIN alliances_members am ON g.id = am.gamer \
+	    LEFT JOIN alliances a ON am.alliance = a.id \
+		WHERE c.id = '$stadt_id'";
+	$city_query = mysql_query($city_SQL);	
+	$city_array = mysql_fetch_array($city_query);
+		
+	if($city_array['tag'] != '') { $alliance_tag = '[<a href="?seite=allianz&id='.$city_array['alliance'].'">'.$city_array['tag'].'</a>] '; }
+
+	echo '<h3>Stadt: '.$city_array["name"].'</h3>';
+
+	echo '<table id="table01">';
+	echo '<tr><td>Koordinaten</td><td class="number">'.$city_array["x"].':'.$city_array["y"].'</td></tr>';
+	echo '<tr><td>Besitzer</td><td class="text">'.$alliance_tag;
+	echo ' <a href="?seite=karte&spieler='.$city_array["owner"].'">'.$city_array["user"].'</a></td></tr>';
+	echo '<tr><td>Punkte</td><td class="number">'.city_points($city_array['id']).' Punkte</td></tr>';
+	echo '<tr><td colspan="2"><a href="?seite=marsch&x='.$city_array["x"].'&y='.$city_array["y"].'">Truppen in diese Stadt schicken</a></td></tr>';
+	echo '</table>';
+	/*
 	$city_query = mysql_query("SELECT * FROM cities WHERE `id`='$stadt_id'");
 	$city_array = mysql_fetch_array($city_query);
 	$spieler_id = $city_array['owner'];
@@ -23,6 +43,7 @@ if($stadt_id)
 	$alliance = $member_array['alliance'];
 	$alliance_query = mysql_query("SELECT tag FROM alliances WHERE id='$alliance'");
 	$alliance_array = mysql_fetch_array($alliance_query);
+	
 	if($alliance_array['tag'] != '') { $alliance_tag = '[<a href="?seite=allianz&id='.$alliance.'">'.$alliance_array['tag'].'</a>] '; }
 
 	echo '<h3>Stadt: '.$city_array["name"].'</h3>';
@@ -34,10 +55,20 @@ if($stadt_id)
 	echo '<tr><td>Punkte</td><td class="number">'.city_points($stadt_id).' Punkte</td></tr>';
 	echo '<tr><td colspan="2"><a href="?seite=marsch&x='.$city_array["x"].'&y='.$city_array["y"].'">Truppen in diese Stadt schicken</a></td></tr>';
 	echo '</table>';
+	*/
 }
 elseif($spieler_id)
 {
 	## Profil eines Spielers ausgeben
+	$user_SQL = "SELECT g.id, g.user, g.age, g.gender, g.icq, g.comment, a.tag, am.alliance FROM gamer g \
+		LEFT JOIN alliances_members am ON g.id = am.gamer \
+		LEFT JOIN alliances a ON am.alliance = a.id \
+		WHERE g.id = '$spieler_id'";
+		
+	$user_query = mysql_query($user_SQL);
+	$user_array = mysql_fetch_array($user_query);
+	
+/*	
 	$user_query = mysql_query("SELECT * FROM gamer WHERE `id`='$spieler_id'");
 	$user_array = mysql_fetch_array($user_query);
 	
@@ -46,14 +77,18 @@ elseif($spieler_id)
 	$alliance = $member_array['alliance'];
 	$alliance_query = mysql_query("SELECT * FROM alliances WHERE id='$alliance'");
 	$alliance_array = mysql_fetch_array($alliance_query);
+	
 	if($alliance_array['tag'] != '') { $alliance_tag = '[<a href="?seite=allianz&id='.$alliance.'">'.$alliance_array['tag'].'</a>] '; }
+*/
+
+	if($user_array['tag'] != '') { $alliance_tag = '[<a href="?seite=allianz&id='.$user_array['alliance'].'">'.$user_array['tag'].'</a>] '; }
 
 	$cities_query = mysql_query("SELECT id,name,buildings FROM cities WHERE `owner`='$spieler_id'");
 
 	echo '<h3>Spieler: '.$alliance_tag.$user_array["user"].'</h3>';
 
 	echo '<table id="table01">';
-	echo '<tr><th colspan="2">St&#228;dte des Spielers</th></tr>';
+	echo '<tr><th colspan="2">Städte des Spielers</th></tr>';
 
 	while($cities_row = mysql_fetch_object($cities_query))
 	{
@@ -195,7 +230,7 @@ else
 	echo '</tr></table><br /><br />';
 	
 	// Anzeigen der Karte als Tabelle
-	
+	#TODO komplett auf JOINs umbauen, evtl. alle Städte innerhalb der Region mit einem Query holen
 	echo '<table id="map">';
 	echo '<tr><th> </th><th class="top">'.$start_y.'</th><th class="top">'.($start_y+1).'</th>';
 	echo '<th class="top">'.($start_y+2).'</th><th class="top">'.($start_y+3).'</th><th class="top">'.($start_y+4).'</th></tr>';
