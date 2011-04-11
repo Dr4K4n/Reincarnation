@@ -20,10 +20,10 @@ points_dict = {}
 now = int(time())
 oneweekago = now-7*24*60*60
 
-verbindung = MySQLdb.connect('127.0.0.1','ogame','GauH8eiX')
+verbindung = MySQLdb.connect('127.0.0.1','reincarnation','HCBjBW5XRUEEfA8w')
 cursor = verbindung.cursor()
 
-cursor.execute('USE ogame;')
+cursor.execute('USE reincarnation;')
 
 # alte Nachrichten löschen
 cursor.execute('DELETE FROM messages WHERE time <= %s'%oneweekago)
