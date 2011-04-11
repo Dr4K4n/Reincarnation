@@ -321,8 +321,11 @@ while unendlich == 1:
 				db_field = 'r'+str(research)
 
 				cursor.execute("SELECT "+db_field+" FROM gamer_research WHERE id='%s'"%owner)
-				level = cursor.fetchall()[0][0]
-				level += 1
+				level_array = cursor.fetchall()
+				if len(level_array) != 0:
+					level = level_array[0][0] + 1
+				else:
+					level = 1
 				name = names_research[research][0]
 				
 				gamer_research_new = dict_to_string(gamer_research_dict)
