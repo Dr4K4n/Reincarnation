@@ -36,9 +36,9 @@ def orderbyid(liste):
 	return neueliste,highest_id
 
 # Verbindung zum MySQL Server herstellen und Datenbank auswählen
-verbindung = MySQLdb.connect('127.0.0.1','ogame','youngcoder')
+verbindung = MySQLdb.connect('127.0.0.1','reincarnation','HCBjBW5XRUEEfA8w')
 cursor = verbindung.cursor()
-cursor.execute('USE ogame;')
+cursor.execute('USE reincarnation;')
 
 # Einheitendaten einlesen
 cursor.execute('SELECT id,att,deff,duration,space FROM units ORDER BY id')
